@@ -1,0 +1,21 @@
+{
+	"name": "bleicker/fastrouter",
+	"require": {
+		"bleicker/router": "*",
+		"nikic/fast-route": "*"
+	},
+	"require-dev": {
+		"phpunit/phpunit": "*"
+	},
+	"authors": [
+		{
+			"name": "Carsten Bleicker",
+			"email": "carsten@bleicker.de"
+		}
+	],
+	"autoload": {
+		"psr-4": {
+			"Bleicker\\FastRouter\\": "src"
+		}
+	}
+}
