@@ -1,8 +1,8 @@
 {
 	"name": "bleicker/fastrouter",
 	"require": {
-		"bleicker/router": "*",
-		"nikic/fast-route": "*"
+		"bleicker/router": "dev-master",
+		"nikic/fast-route": "~0.4"
 	},
 	"require-dev": {
 		"phpunit/phpunit": "*"
