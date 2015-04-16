@@ -1,7 +1,7 @@
 {
 	"name": "bleicker/fastrouter",
 	"require": {
-		"bleicker/router": "dev-master",
+		"bleicker/routing": "dev-master",
 		"nikic/fast-route": "~0.4"
 	},
 	"require-dev": {
