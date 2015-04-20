@@ -85,4 +85,12 @@ class Route implements RouteInterface {
 	public function getData() {
 		return $this->data;
 	}
+
+	/**
+	 * @param array $properties
+	 * @return Route
+	 */
+	public static function __set_state($properties = array()) {
+		return new Route($properties['method'], $properties['pattern'], $properties['data']);
+	}
 }
