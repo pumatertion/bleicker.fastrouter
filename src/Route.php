@@ -85,6 +85,4 @@ class Route implements RouteInterface {
 	public function getData() {
 		return $this->data;
 	}
-
-
 }
