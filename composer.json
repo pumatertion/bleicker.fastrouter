@@ -1,7 +1,7 @@
 {
 	"name": "bleicker/fastrouter",
 	"require": {
-		"bleicker/routing": "dev-master",
+		"bleicker/routing": "~1.0",
 		"nikic/fast-route": "~0.4"
 	},
 	"require-dev": {
@@ -17,5 +17,11 @@
 		"psr-4": {
 			"Bleicker\\FastRouter\\": "src"
 		}
-	}
+	},
+	"repositories": [
+		{
+			"type": "git",
+			"url": "git@bitbucket.org:cbleicker/bleicker-routing.git"
+		}
+	]
 }
