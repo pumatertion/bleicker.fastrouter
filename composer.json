@@ -17,11 +17,5 @@
 		"psr-4": {
 			"Bleicker\\FastRouter\\": "src"
 		}
-	},
-	"repositories": [
-		{
-			"type": "git",
-			"url": "git@bitbucket.org:cbleicker/bleicker-routing.git"
-		}
-	]
+	}
 }

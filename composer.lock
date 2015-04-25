@@ -4,15 +4,21 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "0d4a751d64778064378b70d7dbaf7c62",
+    "hash": "37a0d23c3e554b4c682be879a2f7efd8",
     "packages": [
         {
             "name": "bleicker/routing",
             "version": "1.0.1",
             "source": {
                 "type": "git",
-                "url": "git@bitbucket.org:cbleicker/bleicker-routing.git",
+                "url": "https://github.com/pumatertion/bleicker.routing.git",
                 "reference": "a6435bf9c579b964e4e9c1629250bb3efc9dd87e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/pumatertion/bleicker.routing/zipball/a6435bf9c579b964e4e9c1629250bb3efc9dd87e",
+                "reference": "a6435bf9c579b964e4e9c1629250bb3efc9dd87e",
+                "shasum": ""
             },
             "require-dev": {
                 "phpunit/phpunit": "*"
@@ -23,6 +29,7 @@
                     "Bleicker\\Routing\\": "src"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "authors": [
                 {
                     "name": "Carsten Bleicker",
