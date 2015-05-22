@@ -1,8 +1,9 @@
 {
 	"name": "bleicker/fastrouter",
+	"type": "library",
 	"require": {
-		"bleicker/routing": "~1.0",
-		"nikic/fast-route": "~0.4"
+		"bleicker/routing": "1.1.*",
+		"nikic/fast-route": "0.4.*"
 	},
 	"require-dev": {
 		"phpunit/phpunit": "*"
