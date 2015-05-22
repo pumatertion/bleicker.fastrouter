@@ -19,8 +19,6 @@ use ReflectionClass;
  */
 class Router implements RouterInterface {
 
-	const NOT_FOUND = Dispatcher::NOT_FOUND, FOUND = Dispatcher::FOUND, METHOD_NOT_ALLOWED = Dispatcher::METHOD_NOT_ALLOWED;
-
 	/**
 	 * @var RouteInterface[]
 	 */
@@ -85,12 +83,13 @@ class Router implements RouterInterface {
 			$dispatcher = FastRoute\simpleDispatcher($this->getDispatchClosuce());
 		}
 		$routeData = $dispatcher->dispatch(strtolower($method), strtolower($uri));
-		$status = $routeData[0];
-		switch($status){
-			case static::FOUND:
-				return Result::create($status, $routeData[1], $routeData[2]);
+		switch ($routeData[0]) {
+			case Dispatcher::NOT_FOUND:
+				return Result::create(ResultInterface::STATUS_NOT_FOUND);
+			case Dispatcher::METHOD_NOT_ALLOWED:
+				return Result::create(ResultInterface::STATUS_METHOD_NOT_ALLOWED);
 			default:
-				return Result::create($status);
+				return Result::create(ResultInterface::STATUS_FOUND, $routeData[1], $routeData[2]);
 		}
 	}
 
