@@ -1,7 +1,8 @@
 {
 	"name": "bleicker/fastrouter",
+	"type": "library",
 	"require": {
-		"bleicker/routing": "~1.0",
+		"bleicker/routing": "dev-refactoring",
 		"nikic/fast-route": "~0.4"
 	},
 	"require-dev": {
