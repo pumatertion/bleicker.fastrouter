@@ -4,7 +4,6 @@ namespace Bleicker\FastRouter;
 
 use Bleicker\Routing\Result;
 use Bleicker\Routing\ResultInterface;
-use Bleicker\Routing\Route;
 use Bleicker\Routing\RouteInterface;
 use Bleicker\Routing\RouterInterface;
 use Closure;
