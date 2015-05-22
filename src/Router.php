@@ -2,42 +2,96 @@
 
 namespace Bleicker\FastRouter;
 
-use Bleicker\Routing\AbstractRouter;
-use Bleicker\Routing\RouteDataInterface;
+use Bleicker\Routing\Result;
+use Bleicker\Routing\ResultInterface;
+use Bleicker\Routing\Route;
+use Bleicker\Routing\RouteInterface;
+use Bleicker\Routing\RouterInterface;
 use Closure;
 use FastRoute;
+use FastRoute\Dispatcher;
+use ReflectionClass;
 
 /**
- * Class FastRouter
+ * Class Router
  *
- * @package Bleicker\FastRouter
+ * @package Tests\Bleicker\Routing\Unit\Fixtures
  */
-class Router extends AbstractRouter {
+class Router implements RouterInterface {
+
+	const NOT_FOUND = Dispatcher::NOT_FOUND, FOUND = Dispatcher::FOUND, METHOD_NOT_ALLOWED = Dispatcher::METHOD_NOT_ALLOWED;
 
 	/**
-	 * @var array
+	 * @var RouteInterface[]
 	 */
 	protected $routes = [];
 
 	/**
+	 * @var string
+	 */
+	protected $cacheFile;
+
+	/**
+	 * @param string $cacheFile
+	 */
+	public function __construct($cacheFile = NULL) {
+		$this->cacheFile = $cacheFile;
+	}
+
+	/**
+	 * @param string $cacheFile
+	 * @return static
+	 */
+	public static function create($cacheFile = NULL) {
+		$reflection = new ReflectionClass(static::class);
+		return $reflection->newInstanceArgs(func_get_args());
+	}
+
+	/**
+	 * @return boolean
+	 */
+	public function isCacheEnabled() {
+		return (boolean)$this->cacheFile;
+	}
+
+	/**
 	 * @param string $pattern
 	 * @param string $method
-	 * @param RouteDataInterface $data
+	 * @param string $className
+	 * @param string $methodName
 	 * @return $this
 	 */
-	public function addRoute($pattern, $method, RouteDataInterface $data) {
-		$route = new Route($method, $pattern, $data);
-		$this->routes[] = $route;
+	public function addRoute($className, $methodName, $pattern, $method = 'get') {
+		$this->routes[] = Route::create($className, $methodName, $pattern, $method);
 		return $this;
+	}
+
+	/**
+	 * @return RouteInterface[]
+	 */
+	public function getRoutes() {
+		return $this->routes;
 	}
 
 	/**
 	 * @param string $uri
 	 * @param string $method
-	 * @return array
+	 * @return ResultInterface
 	 */
 	public function dispatch($uri, $method = 'get') {
-		return FastRoute\cachedDispatcher($this->getDispatchClosuce(), ['cacheFile' => $this->cacheFile, 'cacheDisabled' => $this->cacheDisabled])->dispatch(strtolower($method), strtolower($uri));
+		if ($this->isCacheEnabled()) {
+			$dispatcher = FastRoute\cachedDispatcher($this->getDispatchClosuce(), ['cacheFile' => $this->cacheFile]);
+		} else {
+			$dispatcher = FastRoute\simpleDispatcher($this->getDispatchClosuce());
+		}
+		$routeData = $dispatcher->dispatch(strtolower($method), strtolower($uri));
+		$status = $routeData[0];
+		switch($status){
+			case static::FOUND:
+				return Result::create($status, $routeData[1], $routeData[2]);
+			default:
+				return Result::create($status);
+		}
 	}
 
 	/**
@@ -52,3 +106,4 @@ class Router extends AbstractRouter {
 		};
 	}
 }
+
